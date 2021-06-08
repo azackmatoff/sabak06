@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:sabak06/constants/app_colors.dart';
 import 'package:sabak06/constants/app_text_styles.dart';
+import 'package:sabak06/widgets/button_content.dart';
 import 'package:sabak06/widgets/custom_button.dart';
+import 'package:sabak06/widgets/raised_gradient_button.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({Key key}) : super(key: key);
@@ -46,12 +48,40 @@ class _HomeViewState extends State<HomeView> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
               Text(
-                'Сенин атың ким чырагым?',
+                'Кандай телефон алгың келет?',
                 style: AppTextStyles.mainQuestion,
               ),
-              CustomButton(
-                buttonText: 'Suroo',
+              RaisedGradientButton(
+                topMargin: 8.0,
+                height: 55.0,
+                width: 350.0,
+                child: ButtonContent(
+                  iconText: 'A',
+                  buttonText: 'iPhone',
+                ),
                 onPressed: () {},
+                gradient: LinearGradient(
+                  colors: <Color>[
+                    AppColors.mainColor,
+                    AppColors.secondaryColor,
+                  ],
+                ),
+              ),
+              RaisedGradientButton(
+                topMargin: 8.0,
+                height: 55,
+                width: 350,
+                child: ButtonContent(
+                  iconText: 'B',
+                  buttonText: 'Android',
+                ),
+                onPressed: () {},
+                gradient: LinearGradient(
+                  colors: <Color>[
+                    AppColors.mainColor,
+                    AppColors.secondaryColor,
+                  ],
+                ),
               ),
             ],
           ),

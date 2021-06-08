@@ -8,4 +8,9 @@ class AppTextStyles {
     fontSize: 34,
     fontWeight: FontWeight.w800,
   );
+  static TextStyle whiteButtonBold24 = GoogleFonts.cormorantGaramond(
+    color: AppColors.white,
+    fontSize: 24,
+    fontWeight: FontWeight.w800,
+  );
 }
