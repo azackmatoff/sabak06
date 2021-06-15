@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:sabak06/constants/app_colors.dart';
 import 'package:sabak06/constants/app_text_styles.dart';
+import 'package:sabak06/models/choice.dart';
 import 'package:sabak06/widgets/button_content.dart';
-import 'package:sabak06/widgets/custom_button.dart';
+
 import 'package:sabak06/widgets/raised_gradient_button.dart';
+import 'package:sabak06/models/brain.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({Key key}) : super(key: key);
@@ -13,7 +15,30 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> {
-  List<Widget> bottomNavIcons = [];
+  Choice choice;
+  String question;
+  String choiceOne;
+  String choiceTwo;
+
+  @override
+  void initState() {
+    super.initState();
+    _initQuestion();
+  }
+
+  void _initQuestion() {
+    final _choice = brain.getQuestion(ListType.LIST_ONE);
+
+    setState(() {
+      question = _choice.question;
+      choiceOne = _choice.choiceOne;
+      choiceTwo = _choice.choiceTwo;
+    });
+  }
+
+  void _userHasChosen() {
+    brain.userChoice(ChoiceType.CHOICE_ONE);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -22,9 +47,6 @@ class _HomeViewState extends State<HomeView> {
         gradient: LinearGradient(
           begin: Alignment.bottomLeft,
           end: Alignment.topRight,
-          // Add one stop for each color
-          // Values should increase from 0.0 to 1.0
-          // stops: [0.1, 0.5, 0.8, 0.9],
           colors: [
             AppColors.bgColorLightPurple,
             AppColors.bgColorLightRed,
@@ -48,7 +70,7 @@ class _HomeViewState extends State<HomeView> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
               Text(
-                'Кандай телефон алгың келет?',
+                question,
                 style: AppTextStyles.mainQuestion,
               ),
               RaisedGradientButton(
@@ -57,9 +79,11 @@ class _HomeViewState extends State<HomeView> {
                 width: 350.0,
                 child: ButtonContent(
                   iconText: 'A',
-                  buttonText: 'iPhone',
+                  buttonText: choiceOne,
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  brain.userChoice(ChoiceType.CHOICE_ONE);
+                },
                 gradient: LinearGradient(
                   colors: <Color>[
                     AppColors.mainColor,
@@ -73,9 +97,11 @@ class _HomeViewState extends State<HomeView> {
                 width: 350,
                 child: ButtonContent(
                   iconText: 'B',
-                  buttonText: 'Android',
+                  buttonText: choiceTwo,
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  brain.userChoice(ChoiceType.CHOICE_TWO);
+                },
                 gradient: LinearGradient(
                   colors: <Color>[
                     AppColors.mainColor,
